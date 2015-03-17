@@ -3,4 +3,4 @@
 HIKE_FILE_DIRECTORY=$(cd "$(dirname "$0")" && pwd -P)
 HIKE_FILE="$HIKE_FILE_DIRECTORY/${0##*/}"
 
-echo $HIKE_FILE
+exec "$(cd "$HIKE_FILE_DIRECTORY"/../lib && pwd -P)/hike.rb" "$@"

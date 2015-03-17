@@ -20,6 +20,10 @@ elsif ARGV.first == '-v'
   exit 0 if ARGV.length == 1
 end
 
+# Many Pathname operations use getwd when they shouldn't, and then throw
+# odd exceptions. Reduce our support burden by showing a user-friendly error.
+Dir.getwd rescue abort "The current working directory doesn't exist, cannot proceed."
+
 # Instant paralysis without Homebrew and Ansible.
 homebrew = 'ruby -e "$(curl -fsSL'\
   'https://raw.githubusercontent.com/Homebrew/install/master/install)"'

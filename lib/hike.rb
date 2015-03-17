@@ -25,8 +25,7 @@ end
 Dir.getwd rescue abort "The current working directory doesn't exist, cannot proceed."
 
 # Instant paralysis without Homebrew and Ansible.
-homebrew = 'ruby -e "$(curl -fsSL'\
-  'https://raw.githubusercontent.com/Homebrew/install/master/install)"'
+homebrew = 'ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"'
 system(homebrew, out: $stdout, err: :out) unless command? 'brew'
 
 ansible = 'brew install ansible'

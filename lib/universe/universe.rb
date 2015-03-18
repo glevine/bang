@@ -2,7 +2,7 @@ require 'utils/exceptions'
 require 'utils/system'
 require 'utils/tty'
 
-module Gameplan
+module Universe
   extend self
 
   attr_accessor :failed
@@ -19,7 +19,7 @@ module Gameplan
 
   def fail(msg)
     err msg
-    Gameplan.failed = true
+    Universe.failed = true
   end
 
   def warn(msg)

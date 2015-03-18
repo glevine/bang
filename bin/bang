@@ -1,0 +1,6 @@
+#!/bin/sh
+
+BANG_FILE_DIRECTORY=$(cd "$(dirname "$0")" && pwd -P)
+BANG_FILE="$BANG_FILE_DIRECTORY/${0##*/}"
+
+exec "$(cd "$BANG_FILE_DIRECTORY"/../lib && pwd -P)/bang.rb" "$@"

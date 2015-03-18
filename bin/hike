@@ -1,6 +1,0 @@
-#!/bin/sh
-
-HIKE_FILE_DIRECTORY=$(cd "$(dirname "$0")" && pwd -P)
-HIKE_FILE="$HIKE_FILE_DIRECTORY/${0##*/}"
-
-exec "$(cd "$HIKE_FILE_DIRECTORY"/../lib && pwd -P)/hike.rb" "$@"

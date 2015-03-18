@@ -2,18 +2,18 @@
 
 require 'pathname'
 
-GAMEPLAN_VERSION = '0.0.0'
+UNIVERSE_VERSION = '0.0.0'
 
-GAMEPLAN_LIB_PATH = Pathname.new(__FILE__).realpath.dirname.join('gameplan')
-$LOAD_PATH.unshift(GAMEPLAN_LIB_PATH.to_s)
+UNIVERSE_LIB_PATH = Pathname.new(__FILE__).realpath.dirname.join('universe')
+$LOAD_PATH.unshift(UNIVERSE_LIB_PATH.to_s)
 
-require 'gameplan'
+require 'universe'
 
 if ARGV.first == '--version'
-  puts GAMEPLAN_VERSION
+  puts UNIVERSE_VERSION
   exit 0
 elsif ARGV.first == '-v'
-  puts "Gameplan #{GAMEPLAN_VERSION}"
+  puts "Universe #{UNIVERSE_VERSION}"
   # Shift the -v to the end of the parameter list.
   ARGV << ARGV.shift
   # If no other arguments, just quit here.
@@ -40,19 +40,17 @@ begin
     end
   end
 
-  internal_cmd = GAMEPLAN_LIB_PATH.join('cmd', cmd)
+  internal_cmd = UNIVERSE_LIB_PATH.join('cmd', cmd)
 
   if internal_cmd
     require internal_cmd
-    Gameplan.send cmd.to_s.gsub('-', '_').downcase
+    Universe.send cmd.to_s.gsub('-', '_').downcase
   else
-    Gameplan.error "Unknown command: #{cmd}"
+    Universe.error "Unknown command: #{cmd}"
     exit 1
   end
-rescue PlayUnspecifiedError
-  abort 'This command requires a play argument'
-rescue PackageUnspecifiedError
-  abort 'This command requires a package argument'
+rescue MatterUnspecifiedError
+  abort 'This command requires a matter argument'
 rescue SystemExit
   puts 'Kernel.exit'
   raise
@@ -61,16 +59,16 @@ rescue Interrupt => e
   exit 130
 rescue RuntimeError, SystemCallError => e
   raise if e.message.empty?
-  Gameplan.error e
+  Universe.error e
   puts e.backtrace
   exit 1
 rescue Exception => e
-  Gameplan.error e
+  Universe.error e
   puts "#{Tty.white}Please report this bug:"
   puts e.backtrace
   exit 1
 else
-  exit 1 if Gameplan.failed?
+  exit 1 if Universe.failed?
 end
 
 exit 0

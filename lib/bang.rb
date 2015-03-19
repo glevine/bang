@@ -49,7 +49,7 @@ begin
     Universe.error "Unknown command: #{cmd}"
     exit 1
   end
-rescue MatterUnspecifiedError
+rescue Universe::Errors::MatterUnspecifiedError
   abort 'This command requires a matter argument'
 rescue SystemExit
   puts 'Kernel.exit'

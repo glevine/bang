@@ -1,5 +1,5 @@
+require 'errors/errors'
 require 'extensions/ARGV'
-require 'utils/exceptions'
 require 'utils/system'
 require 'utils/tty'
 

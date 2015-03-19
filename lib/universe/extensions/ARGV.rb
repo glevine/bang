@@ -22,7 +22,7 @@ module Universe
       end
 
       def next
-        at @n+1 or raise UsageError
+        at @n+1 or raise Universe::Errors::UsageError
       end
 
       def value arg

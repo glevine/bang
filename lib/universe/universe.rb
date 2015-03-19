@@ -1,6 +1,9 @@
+require 'extensions/ARGV'
 require 'utils/exceptions'
 require 'utils/system'
 require 'utils/tty'
+
+ARGV.extend(Universe::Extensions::Argv)
 
 module Universe
   extend self

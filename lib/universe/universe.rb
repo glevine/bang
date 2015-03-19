@@ -17,7 +17,7 @@ module Universe
   end
 
   def error(msg)
-    $stderr.puts "#{Tty.red}Error#{Tty.reset}: #{msg}"
+    $stderr.puts "#{Utils::Tty.red}Error#{Utils::Tty.reset}: #{msg}"
   end
 
   def fail(msg)
@@ -26,6 +26,6 @@ module Universe
   end
 
   def warn(msg)
-    $stderr.puts "#{Tty.red}Warning#{Tty.reset}: #{warning}"
+    $stderr.puts "#{Utils::Tty.red}Warning#{Utils::Tty.reset}: #{warning}"
   end
 end

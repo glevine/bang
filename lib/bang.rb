@@ -27,10 +27,10 @@ Dir.getwd rescue abort "The current working directory doesn't exist, cannot proc
 begin
   # Instant paralysis without Homebrew and Ansible.
   homebrew = 'ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"'
-  system(homebrew, out: $stdout, err: :out) unless System.command? 'brew'
+  system(homebrew, out: $stdout, err: :out) unless Universe::Utils::System.command? 'brew'
 
   ansible = 'brew install ansible'
-  system(ansible, out: $stdout, err: :out) unless System.command? 'ansible-playbook'
+  system(ansible, out: $stdout, err: :out) unless Universe::Utils::System.command? 'ansible-playbook'
 
   cmd = nil
 
@@ -64,7 +64,7 @@ rescue RuntimeError, SystemCallError => e
   exit 1
 rescue Exception => e
   Universe.error e
-  puts "#{Tty.white}Please report this bug:"
+  puts "#{Universe::Utils::Tty.white}Please report this bug:"
   puts e.backtrace
   exit 1
 else

@@ -14,7 +14,8 @@ module Universe
       end
 
       def systems
-        @systems ||= downcased_unique_named.map { |name| puts name }
+        require 'system'
+        @systems ||= downcased_unique_named.map { |name| System.new(name) }
       end
 
       def include? arg

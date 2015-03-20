@@ -51,6 +51,9 @@ begin
   end
 rescue Universe::Errors::SystemUnspecifiedError
   abort 'This command requires a system argument'
+rescue Universe::Errors::AnsibleError => e
+  Universe.error e
+  exit 1
 rescue SystemExit
   puts 'Kernel.exit'
   raise

@@ -1,13 +1,21 @@
 module Bang
   class System
-    attr_reader :name
-
-    def initialize name
-      @name = name
+    class << self
+      def path name
+        Pathname.new "#{BANG_LIB_SYSTEMS}/#{name.downcase}.yml"
+      end
     end
 
-    def path
-      "#{BANG_LIB_SYSTEMS}/#{@name}.yml"
+    attr_reader :name
+    attr_reader :path
+
+    def initialize name, path
+      @name = name
+      @path = path.resolved_path
+    end
+
+    def to_s
+      name
     end
   end
 end

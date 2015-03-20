@@ -3,12 +3,12 @@ require 'installers/system'
 module Bang
   # Expand the universe by installing systems.
   def expand
-    raise Bang::Errors::SystemUnspecifiedError if ARGV.named.empty?
+    raise Errors::SystemUnspecifiedError if ARGV.named.empty?
 
-    systems = []
-
-    ARGV.systems.each do |s|
-      Installers::System.new(s).install
+    begin
+      ARGV.systems.each { |s| Installers::System.new(s).install }
+    rescue Errors::SystemUnavailableError => e
+      Bang.fail e.message
     end
   end
 end

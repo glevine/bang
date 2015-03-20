@@ -8,13 +8,10 @@ module Bang
       end
 
       def install
-        output = `(cd #{BANG_LIB} && ansible-playbook -K #{@system.path}) 2>&1`
-
-        if $?.success?
-          puts output
-        else
-          raise Bang::Errors::AnsibleError, output
-        end
+        Bang.alert "Expanding your universe with #{Bang::Utils::Tty.green}#{system.name}#{Bang::Utils::Tty.reset}"
+        output = `(cd #{BANG_LIB} && ansible-playbook -K #{system.path}) 2>&1`
+        raise Bang::Errors::AnsibleError, output unless $?.success?
+        puts output
       end
     end
   end

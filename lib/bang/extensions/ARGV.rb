@@ -15,7 +15,12 @@ module Bang
 
       def systems
         require 'system'
-        @systems ||= downcased_unique_named.map { |name| System.new(name) }
+        @systems ||= downcased_unique_named.map do |name|
+          #TODO: move this into a factory
+          path = System.path name
+          raise Errors::SystemUnavailableError, name unless path.file?
+          System.new name, path
+        end
       end
 
       def include? arg
@@ -27,7 +32,7 @@ module Bang
       end
 
       def value arg
-        arg = find {|o| o =~ /--#{arg}=(.+)/}
+        arg = find { |o| o =~ /--#{arg}=(.+)/ }
         $1 if arg
       end
 

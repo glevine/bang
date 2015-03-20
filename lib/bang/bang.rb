@@ -1,5 +1,6 @@
 require 'errors/errors'
 require 'extensions/ARGV'
+require 'extensions/pathname'
 require 'utils/system'
 require 'utils/tty'
 
@@ -11,8 +12,12 @@ module Bang
   attr_accessor :failed
   alias_method :failed?, :failed
 
+  def alert msg
+    puts "#{Utils::Tty.green}==>#{Utils::Tty.white} #{msg}#{Utils::Tty.reset}"
+  end
+
   def die msg
-    err msg
+    error msg
     exit 1
   end
 
@@ -21,7 +26,7 @@ module Bang
   end
 
   def fail msg
-    err msg
+    error msg
     Bang.failed = true
   end
 

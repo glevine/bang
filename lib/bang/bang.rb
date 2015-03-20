@@ -1,7 +1,7 @@
 require 'errors/errors'
 require 'extensions/ARGV'
 require 'extensions/pathname'
-require 'utils/system'
+require 'utils/shell'
 require 'utils/tty'
 
 ARGV.extend(Bang::Extensions::Argv)

@@ -1,6 +1,6 @@
 module Bang
   module Utils
-    class System
+    class Shell
       class << self
         def command?(name)
           `command -v #{name}`

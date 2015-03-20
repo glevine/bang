@@ -1,6 +1,12 @@
 module Bang
   class System
     class << self
+      def factory name
+        p = path name
+        raise Errors::SystemUnavailableError, name unless p.file?
+        System.new name, p
+      end
+
       def path name
         Pathname.new "#{BANG_LIB_SYSTEMS}/#{name.downcase}.yml"
       end

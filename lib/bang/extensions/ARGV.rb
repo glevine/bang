@@ -15,12 +15,7 @@ module Bang
 
       def systems
         require 'system'
-        @systems ||= downcased_unique_named.map do |name|
-          #TODO: move this into a factory
-          path = System.path name
-          raise Errors::SystemUnavailableError, name unless path.file?
-          System.new name, path
-        end
+        @systems ||= downcased_unique_named.map { |name| System.factory name }
       end
 
       def include? arg

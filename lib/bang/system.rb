@@ -1,11 +1,13 @@
-module Universe
+module Bang
   class System
     attr_reader :name
-    attr_reader :path
 
     def initialize name
       @name = name
-      @path = "#{UNIVERSE_LIB_PATH}/../systems/#{@name}.yml"
+    end
+
+    def path
+      "#{BANG_LIB_SYSTEMS}/#{@name}.yml"
     end
   end
 end

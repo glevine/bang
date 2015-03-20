@@ -1,4 +1,4 @@
-module Universe
+module Bang
   module Errors
     class UsageError < RuntimeError; end
     class SystemUnspecifiedError < UsageError; end

@@ -1,9 +1,9 @@
 require 'installers/system'
 
-module Universe
-  # Expand the universe by installing matter.
+module Bang
+  # Expand the universe by installing systems.
   def expand
-    raise Universe::Errors::SystemUnspecifiedError if ARGV.named.empty?
+    raise Bang::Errors::SystemUnspecifiedError if ARGV.named.empty?
 
     systems = []
 

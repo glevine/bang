@@ -3,9 +3,9 @@ require 'extensions/ARGV'
 require 'utils/system'
 require 'utils/tty'
 
-ARGV.extend(Universe::Extensions::Argv)
+ARGV.extend(Bang::Extensions::Argv)
 
-module Universe
+module Bang
   extend self
 
   attr_accessor :failed
@@ -22,7 +22,7 @@ module Universe
 
   def fail msg
     err msg
-    Universe.failed = true
+    Bang.failed = true
   end
 
   def warn msg

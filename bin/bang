@@ -1,6 +1,8 @@
 #!/bin/sh
 
-BANG_FILE_DIRECTORY=$(cd "$(dirname "$0")" && pwd -P)
-BANG_FILE="$BANG_FILE_DIRECTORY/${0##*/}"
+BANG_SCRIPT_DIRECTORY=$(cd "$(dirname "$0")" && pwd -P)
+BANG_SCRIPT_FILE="$BANG_SCRIPT_DIRECTORY/${0##*/}"
+BANG_PATH=$(cd "$BANG_SCRIPT_DIRECTORY"/.. && pwd -P)
+BANG_LIB=$(cd "$BANG_PATH"/lib && pwd -P)
 
-exec "$(cd "$BANG_FILE_DIRECTORY"/../lib && pwd -P)/bang.rb" "$@"
+exec "$BANG_LIB/bang.rb" "$@"

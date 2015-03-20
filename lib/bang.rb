@@ -2,18 +2,20 @@
 
 require 'pathname'
 
-UNIVERSE_VERSION = '0.0.0'
+BANG_VERSION = '0.0.0'
 
-UNIVERSE_LIB_PATH = Pathname.new(__FILE__).realpath.dirname.join('universe')
-$LOAD_PATH.unshift(UNIVERSE_LIB_PATH.to_s)
+BANG_LIB = Pathname.new(__FILE__).realpath.dirname
+BANG_LIB_BANG = BANG_LIB.join('bang')
+BANG_LIB_SYSTEMS = BANG_LIB.join('systems')
+$LOAD_PATH.unshift(BANG_LIB_BANG.to_s) unless $LOAD_PATH.include?(BANG_LIB_BANG.to_s)
 
-require 'universe'
+require 'bang'
 
 if ARGV.first == '--version'
-  puts UNIVERSE_VERSION
+  puts BANG_VERSION
   exit 0
 elsif ARGV.first == '-v'
-  puts "Universe #{UNIVERSE_VERSION}"
+  puts "Bang #{BANG_VERSION}"
   # Shift the -v to the end of the parameter list.
   ARGV << ARGV.shift
   # If no other arguments, just quit here.
@@ -27,10 +29,10 @@ Dir.getwd rescue abort "The current working directory doesn't exist, cannot proc
 begin
   # Instant paralysis without Homebrew and Ansible.
   homebrew = 'ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"'
-  system(homebrew, out: $stdout, err: :out) unless Universe::Utils::System.command? 'brew'
+  system(homebrew, out: $stdout, err: :out) unless Bang::Utils::System.command? 'brew'
 
   ansible = 'brew install ansible'
-  system(ansible, out: $stdout, err: :out) unless Universe::Utils::System.command? 'ansible-playbook'
+  system(ansible, out: $stdout, err: :out) unless Bang::Utils::System.command? 'ansible-playbook'
 
   cmd = nil
 
@@ -40,19 +42,19 @@ begin
     end
   end
 
-  internal_cmd = UNIVERSE_LIB_PATH.join('cmd', cmd)
+  internal_cmd = BANG_LIB_BANG.join('cmd', cmd)
 
   if internal_cmd
     require internal_cmd
-    Universe.send cmd.to_s.gsub('-', '_').downcase
+    Bang.send cmd.to_s.gsub('-', '_').downcase
   else
-    Universe.error "Unknown command: #{cmd}"
+    Bang.error "Unknown command: #{cmd}"
     exit 1
   end
-rescue Universe::Errors::SystemUnspecifiedError
+rescue Bang::Errors::SystemUnspecifiedError
   abort 'This command requires a system argument'
-rescue Universe::Errors::AnsibleError => e
-  Universe.error e
+rescue Bang::Errors::AnsibleError => e
+  Bang.error e
   exit 1
 rescue SystemExit
   puts 'Kernel.exit'
@@ -62,16 +64,16 @@ rescue Interrupt => e
   exit 130
 rescue RuntimeError, SystemCallError => e
   raise if e.message.empty?
-  Universe.error e
+  Bang.error e
   puts e.backtrace
   exit 1
 rescue Exception => e
-  Universe.error e
-  puts "#{Universe::Utils::Tty.white}Please report this bug:"
+  Bang.error e
+  puts "#{Bang::Utils::Tty.white}Please report this bug:"
   puts e.backtrace
   exit 1
 else
-  exit 1 if Universe.failed?
+  exit 1 if Bang.failed?
 end
 
 exit 0

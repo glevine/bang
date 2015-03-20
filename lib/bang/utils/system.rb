@@ -1,4 +1,4 @@
-module Universe
+module Bang
   module Utils
     class System
       class << self

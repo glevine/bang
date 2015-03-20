@@ -1,4 +1,4 @@
-module Universe
+module Bang
   module Extensions
     module Argv
       def named
@@ -23,7 +23,7 @@ module Universe
       end
 
       def next
-        at @n+1 or raise Universe::Errors::UsageError
+        at @n+1 or raise Bang::Errors::UsageError
       end
 
       def value arg

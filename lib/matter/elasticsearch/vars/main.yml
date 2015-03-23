@@ -1,0 +1,5 @@
+---
+plugins:
+  - "mobz/elasticsearch-head"
+  - "elasticsearch/elasticsearch-analysis-icu/2.2.0"
+  - "polyfractal/elasticsearch-inquisitor"

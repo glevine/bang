@@ -1,0 +1,6 @@
+---
+# Can't use the service module on OSX.
+# https://github.com/ansible/ansible/issues/10412
+- name: restart apache
+  command: apachectl restart
+  sudo: yes

@@ -1,0 +1,12 @@
+---
+- name: install mysql
+  homebrew: name=mysql state=present
+
+- name: drop /etc/my.cnf
+  command: mv /etc/my.cnf /etc/my.cnf.bak removes=/etc/my.cnf
+
+- name: set up the mysql configuration
+  copy: src=my.cnf dest=/usr/local/opt/mysql/my.cnf
+
+- name: launch mysql at login
+  command: brew services start mysql

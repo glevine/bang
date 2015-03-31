@@ -20,3 +20,6 @@
 
 - name: Link the user configuration.
   file: src=/usr/local/Universe/php54/setup.ini dest=/usr/local/etc/php/5.4/conf.d/{{ ansible_ssh_user }}-setup.ini state=link force=yes
+
+- name: Copy files that should be sourced.
+  copy: src=php54 dest=/usr/local/universe/shell/php54

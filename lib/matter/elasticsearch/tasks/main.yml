@@ -1,9 +1,12 @@
 ---
-- name: install elasticsearch
+- name: Install Elasticsearch.
   homebrew: name=elasticsearch state=present
-- command: brew --prefix elasticsearch
+
+- name: Where is Elasticsearch?
+  command: brew --prefix elasticsearch
   register: elasticsearch_home
-- name: install elasticsearch plugins
+
+- name: Install elasticsearch plugins.
   command: "bin/plugin --install {{ item }} chdir={{ elasticsearch_home.stdout }}"
   with_items: plugins
   ignore_errors: yes

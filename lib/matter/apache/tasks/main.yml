@@ -1,13 +1,13 @@
 ---
-- name: create the user configuration
+- name: Create the user configuration.
   template: src=user.conf.j2 dest=/usr/local/Universe/apache/user.conf
 
-- name: link the user configuration
+- name: Link the user configuration.
   file: src=/usr/local/Universe/apache/user.conf dest=/etc/apache2/users/{{ ansible_ssh_user }}.conf state=link
   sudo: yes
   notify: restart apache
 
-- name: avoid the "Too many open files" error that crops up from time to time
+- name: Avoid the "Too many open files" error that crops up from time to time.
   lineinfile: dest=/etc/launchd.conf line="limit maxfiles 10204 10204"
   sudo: yes
   notify: restart apache

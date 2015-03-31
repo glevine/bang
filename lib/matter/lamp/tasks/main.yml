@@ -1,0 +1,7 @@
+---
+- name: Load the Homebrew PHP module.
+  lineinfile: dest=/etc/apache2/users/{{ ansible_ssh_user }}.conf line="LoadModule php5_module /usr/local/lib/libphp5.so"
+  notify: restart apache
+
+- name: Make brew-switch-php sourceable.
+  copy: src=brew-switch-php dest={{ universe }}/bin/brew-switch-php mode=0755

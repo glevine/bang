@@ -1,0 +1,6 @@
+---
+- include: php54.yml
+
+- hosts: all
+  roles:
+    - role: lamp

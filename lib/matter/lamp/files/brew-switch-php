@@ -1,0 +1,24 @@
+#!/bin/sh
+#
+# Switches the linked libphp5.so to the one for the stated PHP version.
+#
+# Restarts Apache to make sure the new module is loaded.
+#
+# Usage:
+#
+# brew-php-switch 5.4
+# brew-php-switch 54
+#
+
+set -e
+
+link_name="/usr/local/lib/libphp5.so"
+version=$(echo "$1" | sed 's/[^0-9]*//g')
+libphp=$(brew list php"$version" | grep libphp)
+
+ln -sf "$libphp" "$link_name"
+echo "$link_name \033[0;36m==>\033[0m $libphp"
+
+sudo apachectl restart
+
+exit 0

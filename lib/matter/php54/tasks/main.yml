@@ -1,0 +1,22 @@
+---
+- name: Install PHP 5.4.
+  homebrew: name=php54 state=present install_options=with-mysql,with-imap
+
+- name: Install JSMin for PHP 5.4
+  homebrew: name=php54-jsmin state=present
+
+- name: Install mcrypt for PHP 5.4
+  homebrew: name=php54-mcrypt state=present
+
+- name: Where is libphp?
+  shell: brew list php54 | grep libphp
+  register: libphp
+
+- name: Link libphp for PHP 5.4.
+  file: src={{ libphp.stdout }} dest=/usr/local/lib/libphp5.so state=link force=yes
+
+- name: Create the user configuration.
+  template: src=setup.ini.j2 dest=/usr/local/Universe/php54/setup.ini
+
+- name: Link the user configuration.
+  file: src=/usr/local/Universe/php54/setup.ini dest=/usr/local/etc/php/5.4/conf.d/{{ ansible_ssh_user }}-setup.ini state=link force=yes

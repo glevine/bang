@@ -1,0 +1,12 @@
+---
+depends_on:
+  - autoconf
+  - gettext
+  - jpeg
+  - libpng
+  - openssl
+  - zlib
+  - freetype
+  - imap-uw
+  - mcrypt
+  - pcre

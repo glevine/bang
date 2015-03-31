@@ -6,6 +6,18 @@ module Bang
           `command -v #{name}`
           $?.success?
         end
+
+        # Taken from https://stackoverflow.com/a/12523283.
+        def timezone?
+          p = Pathname.new '/etc/timezone'
+          return `cat /etc/timezone` if p.file?
+
+          p = Pathname.new '/etc/localtime'
+          return `readlink /etc/localtime | sed "s#/usr/share/zoneinfo/##"` if p.symlink?
+
+          checksum = `md5sum /etc/localtime | cut -d' ' -f1`
+          return `find /usr/share/zoneinfo/ -type f -exec md5sum {} \; | grep "^#{checksum}" | sed "s#.*/usr/share/zoneinfo/##" | head -n 1`
+        end
       end
     end
   end

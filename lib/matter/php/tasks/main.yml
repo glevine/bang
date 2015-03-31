@@ -1,0 +1,19 @@
+---
+- name: Tap homebrew/php.
+  homebrew_tap: tap=homebrew/php state=present
+
+- name: Install PHP dependencies.
+  homebrew: name={{ item }} state=present
+  with_items: depends_on
+
+- name: Install PHP CodeSniffer.
+  homebrew: name=php-code-sniffer state=present
+
+- name: Install PDepend.
+  homebrew: name=pdepend state=present
+
+- name: Install PHP Mess Detector.
+  homebrew: name=phpmd state=present
+
+- name: Install Composer.
+  homebrew: name=composer state=present

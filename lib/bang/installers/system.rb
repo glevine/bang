@@ -9,8 +9,9 @@ module Bang
 
       def install
         Bang.alert "Expanding your universe with #{Bang::Utils::Tty.green}#{system.name}#{Bang::Utils::Tty.reset}"
+        universe = Bang.universe?
         tz = Bang::Utils::Shell.timezone?
-        output = `(cd #{BANG_LIB} && ansible-playbook -K #{system.path} --extra-vars "olson_tz=#{tz}") 2>&1`
+        output = `(cd #{BANG_LIB} && ansible-playbook -K #{system.path} --extra-vars "universe=#{universe} olson_tz=#{tz}") 2>&1`
         raise Bang::Errors::AnsibleError, output unless $?.success?
         puts output
       end

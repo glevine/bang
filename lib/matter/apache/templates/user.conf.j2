@@ -2,9 +2,9 @@
 User {{ ansible_ssh_user }}
 Group staff
 
-DocumentRoot "/usr/local/Universe/apache/htdocs"
+DocumentRoot "{{ universe }}/apache/htdocs"
 
-<Directory "/usr/local/Universe/apache/htdocs">
+<Directory "{{ universe }}/apache/htdocs">
     Options Indexes FollowSymLinks MultiViews
     AllowOverride All
     Order allow,deny

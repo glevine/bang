@@ -16,10 +16,10 @@
   file: src={{ libphp.stdout }} dest=/usr/local/lib/libphp5.so state=link force=yes
 
 - name: Create the user configuration.
-  template: src=setup.ini.j2 dest=/usr/local/Universe/php54/setup.ini
+  template: src=setup.ini.j2 dest={{ universe }}/php54/setup.ini
 
 - name: Link the user configuration.
-  file: src=/usr/local/Universe/php54/setup.ini dest=/usr/local/etc/php/5.4/conf.d/{{ ansible_ssh_user }}-setup.ini state=link force=yes
+  file: src={{ universe }}/php54/setup.ini dest=/usr/local/etc/php/5.4/conf.d/{{ ansible_ssh_user }}-setup.ini state=link force=yes
 
 - name: Copy files that should be sourced.
-  copy: src=php54 dest=/usr/local/universe/shell/php54
+  copy: src=php54 dest={{ universe }}/shell/php54

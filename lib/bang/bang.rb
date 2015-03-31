@@ -1,3 +1,4 @@
+require 'fileutils'
 require 'errors/errors'
 require 'extensions/ARGV'
 require 'extensions/pathname'
@@ -32,5 +33,11 @@ module Bang
 
   def warn msg
     $stderr.puts "#{Utils::Tty.red}Warning#{Utils::Tty.reset}: #{warning}"
+  end
+
+  def universe?
+    path = '/usr/local/Universe'
+    FileUtils.mkpath path
+    Pathname.new(path).realpath
   end
 end

@@ -1,9 +1,9 @@
 ---
 - name: Create the user configuration.
-  template: src=user.conf.j2 dest=/usr/local/Universe/apache/user.conf
+  template: src=user.conf.j2 dest={{ universe }}/apache/user.conf
 
 - name: Link the user configuration.
-  file: src=/usr/local/Universe/apache/user.conf dest=/etc/apache2/users/{{ ansible_ssh_user }}.conf state=link
+  file: src={{ universe }}/apache/user.conf dest=/etc/apache2/users/{{ ansible_ssh_user }}.conf state=link
   sudo: yes
   notify: restart apache
 

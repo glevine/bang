@@ -2,11 +2,5 @@
 - name: Install chruby.
   homebrew: name=chruby state=present
 
-- name: Install ruby-install.
-  homebrew: name=ruby-install state=present
-
-- name: Install current stable Ruby.
-  command: ruby-install ruby
-
 - name: Copy files that should be sourced.
   copy: src=chruby dest=/usr/local/universe/shell/chruby

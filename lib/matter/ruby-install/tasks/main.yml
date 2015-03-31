@@ -1,0 +1,6 @@
+---
+- name: Install ruby-install.
+  homebrew: name=ruby-install state=present
+
+- name: Install current stable Ruby.
+  command: ruby-install ruby

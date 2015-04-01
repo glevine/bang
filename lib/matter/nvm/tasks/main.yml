@@ -1,0 +1,12 @@
+---
+- name: Install NVM.
+  homebrew: name=nvm state=present
+
+- name: Create NVM's working directory.
+  file: path=/Users/{{ ansible_ssh_user }}/.nvm state=directory
+
+- name: Move shell configurations to a place where they can be safely and reliably sourced.
+  copy: src=nvm dest={{ universe }}/shell/nvm
+
+- name: Install current stable Node.js.
+  command: nvm install stable

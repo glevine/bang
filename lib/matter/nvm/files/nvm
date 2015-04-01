@@ -1,0 +1,3 @@
+# Init NVM according to homebrew formula caveats.
+export NVM_DIR=~/.nvm
+source $(brew --prefix nvm)/nvm.sh

@@ -1,0 +1,12 @@
+---
+- name: Install Boot2Docker to use Docker on OSX.
+  homebrew: name=boot2docker state=present
+
+- name: Launch Boot2Docker at login.
+  shell: ln -sfv /usr/local/opt/boot2docker/*.plist /Users/{{ ansible_ssh_user }}/Library/LaunchAgents
+
+- name: Load Boot2Docker now.
+  command: launchctl load /Users/{{ ansible_ssh_user }}/Library/LaunchAgents/homebrew.mxcl.boot2docker.plist
+
+- name: Install Compose to help with running more complex applications in Docker.
+  homebrew: name=fig state=present

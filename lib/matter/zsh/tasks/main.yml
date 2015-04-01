@@ -1,0 +1,22 @@
+---
+- name: Install ZSH via Homebrew.
+  homebrew: name=zsh state=present
+
+- name: Get completions for ZSH.
+  homebrew: name=zsh-completions state=present
+
+- name: Where is ZSH?
+  command: which zsh
+  register: zsh
+
+- name: Add the desired ZSH to /etc/shells.
+  lineinfile: dest=/etc/shells line={{ zsh.stdout }}
+  sudo: yes
+
+- name: Rename /etc/zshenv to /etc/zshrc to fix a ZSH misconfiguration by Apple.
+  command: "mv /etc/{zshenv,zshrc}"
+  sudo: yes
+  ignore_errors: yes
+
+- name: Change the default shell to ZSH.
+  command: chsh -s {{ zsh.stdout }} {{ ansible_ssh_user }}

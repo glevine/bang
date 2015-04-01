@@ -1,0 +1,6 @@
+---
+- name: Install Sublime Text.
+  homebrew_cask: name=sublime-text state=present
+
+- name: Create a pseudo-bin stub that links to Sublime Text's bin stub.
+  file: src="/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" dest={{ universe }}/bin/subl state=link

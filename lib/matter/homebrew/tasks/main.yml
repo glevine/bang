@@ -1,0 +1,10 @@
+---
+- name: Where is brew?
+  command: brew --prefix
+  register: brew_home
+
+- name: Install the brew Bash completion script.
+  copy: src={{ brew_home.stdout }}/Library/Contributions/brew_bash_completion.sh dest={{ brew_home.stdout }}/etc/bash_completion.d/brew_bash_completion.sh
+
+- name: Install the brew ZSH completion function.
+  copy: src={{ brew_home.stdout }}/Library/Contributions/brew_zsh_completion.zsh dest={{ brew_home.stdout }}/share/zsh/site-functions/brew_zsh_completion.zsh

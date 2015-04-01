@@ -1,0 +1,4 @@
+---
+# http://zachholman.com/boom/
+- name: Install Boom.
+  gem: name=boom state=present

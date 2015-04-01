@@ -1,0 +1,11 @@
+---
+- name: Install Vagrant.
+  homebrew_cask: name=vagrant state=present
+
+- name: Install Vagrant Manager.
+  homebrew_cask: name=vagrant-manager state=present
+
+- name: Install Vagrant plugins.
+  command: vagrant plugin install {{ item }}
+  with_items: plugins
+  ignore_errors: yes

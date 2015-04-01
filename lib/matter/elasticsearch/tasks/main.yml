@@ -6,7 +6,7 @@
   command: brew --prefix elasticsearch
   register: elasticsearch_home
 
-- name: Install elasticsearch plugins.
-  command: "bin/plugin --install {{ item }} chdir={{ elasticsearch_home.stdout }}"
+- name: Install Elasticsearch plugins.
+  command: bin/plugin --install {{ item }} chdir={{ elasticsearch_home.stdout }}
   with_items: plugins
   ignore_errors: yes

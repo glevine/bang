@@ -8,5 +8,8 @@
 - name: Create the MySQL configuration.
   copy: src=my.cnf dest=/usr/local/opt/mysql/my.cnf
 
+- name: Install Homebrew Services.
+  homebrew_tap: tap=gapple/services state=present
+
 - name: Launch MySQL at login.
   command: brew services start mysql

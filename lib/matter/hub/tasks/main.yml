@@ -1,0 +1,6 @@
+---
+- name: Install hub.
+  homebrew: name=hub state=present
+
+- name: Move shell configurations to a place where they can be safely and reliably sourced.
+  copy: src=hub dest={{ universe }}/shell/hub

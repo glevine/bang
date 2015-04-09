@@ -1,0 +1,9 @@
+<?php
+return array(
+    'url_base' => 'http://localhost/xhprof/',
+    'url_static' => '{{ universe }}/apache/xhprof/', // When undefined, it defaults to $config['url_base'] . 'public/'. This should be absolute URL.
+    'pdo' => new PDO('mysql:dbname=xhprof;host=localhost;charset=utf8', 'root', ''),
+    'tmp_table_engine' => 'Memory', // MySQL Table Engine used for temporary tables
+    'cache_expiration' => '60', // How many seconds a browser allowed to cache profilling results
+    'profiler_enabled' => true // Global switch to disable the profiler by default
+);

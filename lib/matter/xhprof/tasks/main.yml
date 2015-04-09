@@ -22,3 +22,20 @@
 
 - name: Make xhprof sourceable.
   template: src=xhprof.j2 dest={{ universe }}/bin/xhprof mode=0755
+
+- name: Enable short open tags for XHProf.io.
+  lineinfile: dest={{ universe }}/{{ homebrew_php.stdout }}/setup.ini line="short_open_tag = On"
+  notify: restart apache
+
+- name: Install XHProf.io.
+  git: repo=https://github.com/staabm/xhprof.io.git dest={{ universe }}/apache/xhprof
+
+- name: Create the XHProf.io database.
+  mysql_db: name=xhprof state=present
+  notify: import xhprof database
+
+- name: Create the XHProf.io configuration.
+  template: src=config.inc.php.j2 dest={{ universe }}/xhprof/config.inc.php
+
+- name: Link the XHProf.io configuration.
+  file: src={{ universe }}/xhprof/config.inc.php dest={{ universe }}/apache/xhprof/xhprof/includes/config.inc.php state=link

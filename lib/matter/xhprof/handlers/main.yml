@@ -1,0 +1,3 @@
+---
+- name: import xhprof database
+  mysql_db: name=xhprof state=import target={{ universe }}/apache/xhprof/setup/database.sql

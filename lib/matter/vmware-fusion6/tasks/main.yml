@@ -1,0 +1,3 @@
+---
+- name: Install VMWare Fusion 6.
+  homebrew_cask: name=vmware-fusion6 state=present

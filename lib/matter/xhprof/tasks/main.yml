@@ -1,0 +1,24 @@
+---
+- name: Which PHP is linked?
+  shell: ls -l $(brew --prefix)/bin/php | awk 'match($0, /php[0-9]+/) { print substr($0, RSTART, RLENGTH) }'
+  register: homebrew_php
+
+- name: What is the PHP version?
+  shell: ls -l $(brew --prefix)/bin/php | awk 'match($0, /[0-9]\.[0-9]/) { print substr($0, RSTART, RLENGTH) }'
+  register: php_version
+
+- name: Install XHProf.
+  homebrew: name={{ homebrew_php.stdout }}-xhprof state=present
+
+- name: Link the XHProf extension.
+  file: src=/usr/local/opt/{{ homebrew_php.stdout }}-xhprof/xhprof.so dest={{ universe }}/xhprof/xhprof.so state=link
+
+- name: Create the XHProf configuration.
+  template: src=ext-xhprof.ini.j2 dest={{ universe }}/xhprof/ext-xhprof.ini
+
+- name: Link the XHProf configuration.
+  file: src={{ universe }}/xhprof/ext-xhprof.ini dest=/usr/local/etc/php/{{ php_version.stdout }}/conf.d/ext-xhprof.ini state=link
+  notify: restart apache
+
+- name: Make xhprof sourceable.
+  template: src=xhprof.j2 dest={{ universe }}/bin/xhprof mode=0755

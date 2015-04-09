@@ -1,0 +1,45 @@
+#!/bin/sh
+#
+# Enables or disables XHProf within a particular path.
+#
+# Go to the directory on your web server where you want to enable XHProf
+# and run `xhprof on` to enable XHProf for that path. A .htaccess file
+# must exist in that directory.
+#
+# Usage:
+#
+# xhprof on
+# xhprof off
+#
+
+set -e
+
+enable_xhprof () {
+    val=`cat .htaccess | grep "xhprof"`
+
+    if [ -z "$val" ]; then
+        echo '
+php_value auto_prepend_file "{{ universe }}/apache/xhprof/inc/prepend.php"' >> .htaccess
+    fi
+
+    echo "XHProf is enabled."
+}
+
+disable_xhprof () {
+    cat .htaccess | grep -v "xhprof" > .htaccess.tmp
+    mv .htaccess.tmp .htaccess
+    echo "XHProf is disabled."
+}
+
+if [ ! -f .htaccess ]; then
+    echo "Could not find a .htaccess file in the current directory."
+    exit 0
+fi
+
+if [ "$1" = "on" ]; then
+    enable_xhprof
+else
+    disable_xhprof
+fi
+
+exit 0

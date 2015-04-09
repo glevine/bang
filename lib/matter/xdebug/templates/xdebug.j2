@@ -1,0 +1,29 @@
+#!/bin/sh
+#
+# Enables or disables the Xdebug extension and restarts Apache.
+#
+# Usage:
+#
+# xdebug on
+# xdebug off
+#
+
+set -e
+
+if [ "$1" = "on" ]; then
+    enable_from=0
+    enable_to=1
+    autostart_from=0
+    autostart_to=1
+else
+    enable_from=1
+    enable_to=0
+    autostart_from=1
+    autostart_to=0
+fi
+
+sed -i "" --follow-symlinks "s/^xdebug.remote_enable=${enable_from}/xdebug.remote_enable=${enable_to}/g" {{ universe }}/xdebug/ext-xdebug.ini
+sed -i "" --follow-symlinks "s/^xdebug.remote_autostart=${autostart_from}/xdebug.remote_autostart=${autostart_to}/g" {{ universe }}/xdebug/ext-xdebug.ini
+sudo apachectl restart
+
+exit 0

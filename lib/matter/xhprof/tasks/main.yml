@@ -20,8 +20,8 @@
   file: src={{ universe }}/xhprof/ext-xhprof.ini dest=/usr/local/etc/php/{{ php_version.stdout }}/conf.d/ext-xhprof.ini state=link
   notify: restart apache
 
-- name: Make xhprof sourceable.
-  template: src=xhprof.j2 dest={{ universe }}/bin/xhprof mode=0755
+- name: Add the xhprof executable to the bin path.
+  template: src=xhprof.j2 dest=/usr/local/bin/xhprof mode=0755
 
 - name: Enable short open tags for XHProf.io.
   lineinfile: dest={{ universe }}/{{ homebrew_php.stdout }}/setup.ini line="short_open_tag = On"

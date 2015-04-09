@@ -20,5 +20,5 @@
   file: src={{ universe }}/xdebug/ext-xdebug.ini dest=/usr/local/etc/php/{{ php_version.stdout }}/conf.d/ext-xdebug.ini state=link
   notify: restart apache
 
-- name: Make xdebug sourceable.
-  template: src=xdebug.j2 dest={{ universe }}/bin/xdebug mode=0755
+- name: Add the xdebug executable to the bin path.
+  template: src=xdebug.j2 dest=/usr/local/bin/xdebug mode=0755

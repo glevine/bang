@@ -1,22 +1,16 @@
 module Bang
   module Installers
     class Galaxy
-      attr_reader :user
-      attr_reader :repo
-      attr_reader :name
+      attr_reader :galaxy
 
-      def initialize user, repo
-        @user = user
-        @repo = repo
-        @name = "#{@user}/#{@repo}"
+      def initialize galaxy
+        @galaxy = galaxy
       end
 
       def install
-        galaxy_dir = Bang.galaxies?.join("#{@user.downcase}/#{@repo.downcase}")
-        raise Bang::Errors::GalaxyAlreadyExistsError, @name if galaxy_dir.directory?
-
-        Bang.alert "Discovering the galaxy named #{Bang::Utils::Tty.green}#{@name}#{Bang::Utils::Tty.reset}"
-        abort unless system 'git', 'clone', "https://github.com/#{@name}", galaxy_dir.to_s
+        raise Bang::Errors::GalaxyAlreadyExistsError, galaxy.to_s if galaxy.path.directory?
+        Bang.alert "Discovering the galaxy named #{Bang::Utils::Tty.green}#{galaxy.name}#{Bang::Utils::Tty.reset}"
+        abort unless system 'git', 'clone', "https://github.com/#{galaxy.name}", galaxy.path.to_s
       end
     end
   end

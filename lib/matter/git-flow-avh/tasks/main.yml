@@ -1,3 +1,0 @@
----
-- name: Install git-flow (AVH Edition).
-  homebrew: name=git-flow-avh state=present

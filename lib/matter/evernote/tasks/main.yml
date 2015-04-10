@@ -1,3 +1,0 @@
----
-- name: Install Evernote.
-  homebrew_cask: name=evernote state=present

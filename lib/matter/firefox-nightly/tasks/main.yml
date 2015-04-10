@@ -1,3 +1,0 @@
----
-- name: Install Mozilla Firefox Nightly.
-  homebrew_cask: name=firefox-nightly state=present

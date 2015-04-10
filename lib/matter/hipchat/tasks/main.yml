@@ -1,3 +1,0 @@
----
-- name: Install HipChat.
-  homebrew_cask: name=hipchat state=present

@@ -1,3 +1,0 @@
----
-- name: Install Git via Homebrew.
-  homebrew: name=git state=present

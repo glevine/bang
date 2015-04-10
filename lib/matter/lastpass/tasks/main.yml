@@ -1,3 +1,0 @@
----
-- name: Install Lastpass CLI.
-  homebrew: name=lastpass-cli state=present install_options=with-pinentry,with-doc

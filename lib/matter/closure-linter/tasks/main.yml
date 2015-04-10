@@ -1,9 +1,0 @@
----
-- name: Install Google's Closure Linter.
-  homebrew: name=closure-linter state=present
-
-- name: Move .gjslint-config to a place where it can be safely and reliably symlinked to $HOME.
-  copy: src=.gjslint-config dest={{ universe }}/home/.gjslint-config
-
-- name: Move shell configurations to a place where they can be safely and reliably sourced.
-  copy: src=closure-linter dest={{ universe }}/shell/closure-linter

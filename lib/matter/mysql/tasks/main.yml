@@ -1,9 +1,0 @@
----
-- name: Install MySQL.
-  homebrew: name=mysql state=present
-
-- name: Drop /etc/my.cnf because we want to use our own configuration.
-  command: mv /etc/my.cnf /etc/my.cnf.bak removes=/etc/my.cnf
-
-- name: Create the MySQL configuration.
-  copy: src=my.cnf dest=/usr/local/opt/mysql/my.cnf

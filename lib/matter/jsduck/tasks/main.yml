@@ -1,4 +1,0 @@
----
-- name: Install JSDuck.
-  gem: name=jsduck state=present
-  sudo: yes

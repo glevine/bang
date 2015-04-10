@@ -32,7 +32,7 @@ module Bang
   end
 
   def warn msg
-    $stderr.puts "#{Utils::Tty.red}Warning#{Utils::Tty.reset}: #{warning}"
+    $stderr.puts "#{Utils::Tty.red}Warning#{Utils::Tty.reset}: #{msg}"
   end
 
   def universe?

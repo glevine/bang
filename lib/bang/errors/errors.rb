@@ -3,15 +3,21 @@ module Bang
     class UsageError < RuntimeError; end
     class SystemUnspecifiedError < UsageError; end
 
-    class SystemUnavailableError < RuntimeError
-      attr_reader :name
-
+    class GalaxyUnavailableError < RuntimeError
       def initialize name
-        @name = name
+        super "No available galaxy for #{name}"
       end
+    end
 
-      def to_s
-        "No available system for #{name}"
+    class GalaxyAlreadyExistsError < RuntimeError
+      def initialize name
+        super "Galaxy #{name} has already been discovered"
+      end
+    end
+
+    class SystemUnavailableError < RuntimeError
+      def initialize name
+        super "No available system for #{name}"
       end
     end
 

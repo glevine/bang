@@ -6,7 +6,7 @@ BANG_VERSION = '0.1.0'
 
 BANG_LIB = Pathname.new(__FILE__).realpath.dirname
 BANG_LIB_BANG = BANG_LIB.join('bang')
-BANG_LIB_SYSTEMS = BANG_LIB.join('systems')
+BANG_LIB_SYSTEMS = BANG_LIB.join('systems') #TODO: not needed anymore
 $LOAD_PATH.unshift(BANG_LIB_BANG.to_s) unless $LOAD_PATH.include?(BANG_LIB_BANG.to_s)
 
 require 'bang'

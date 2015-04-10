@@ -36,8 +36,10 @@ module Bang
   end
 
   def universe?
-    path = '/usr/local/Universe'
-    FileUtils.mkpath path
-    Pathname.new(path).realpath
+    Pathname.create_path '/usr/local/Universe'
+  end
+
+  def galaxies?
+    Pathname.create_path '/usr/local/Galaxies'
   end
 end

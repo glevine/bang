@@ -15,6 +15,18 @@ module Bang
       def path user, repo
         Bang.galaxies?.join("#{user.downcase}/#{repo.downcase}")
       end
+
+      def list?
+        dir = Bang.galaxies?
+
+        if dir.directory?
+          dir.subdirs.each do |user|
+            user.subdirs.each do |repo|
+              yield user, repo if repo.join('.git').directory?
+            end
+          end
+        end
+      end
     end
 
     attr_reader :user

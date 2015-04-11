@@ -11,4 +11,8 @@ class Pathname
   def resolved_path
     self.symlink? ? dirname+readlink : self
   end
+
+  def subdirs
+    children.select{ |child| child.directory? }
+  end
 end

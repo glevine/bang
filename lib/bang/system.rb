@@ -1,3 +1,5 @@
+require 'galaxy'
+
 module Bang
   class System
     class << self
@@ -8,7 +10,10 @@ module Bang
       end
 
       def path name
-        Pathname.new "#{BANG_LIB_SYSTEMS}/#{name.downcase}.yml"
+        Galaxy.list? do |user, repo|
+          p = repo.join("systems/#{name.downcase}.yml")
+          return p if p.file?
+        end
       end
     end
 

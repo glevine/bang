@@ -15,7 +15,7 @@ module Bang
           `/usr/bin/tput cols`.strip.to_i
         end
 
-        def truncate(str)
+        def truncate str
           str.to_s[0, width - 4]
         end
 

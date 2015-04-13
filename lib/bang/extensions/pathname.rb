@@ -12,6 +12,10 @@ class Pathname
     self.symlink? ? dirname+readlink : self
   end
 
+  def cd
+    Dir.chdir(self){ yield }
+  end
+
   def subdirs
     children.select{ |child| child.directory? }
   end

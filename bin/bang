@@ -1,8 +1,10 @@
-#!/bin/sh
+#!/System/Library/Frameworks/Ruby.framework/Versions/Current/usr/bin/ruby
 
-BANG_SCRIPT_DIRECTORY=$(cd "$(dirname "$0")" && pwd -P)
-BANG_SCRIPT_FILE="$BANG_SCRIPT_DIRECTORY/${0##*/}"
-BANG_PATH=$(cd "$BANG_SCRIPT_DIRECTORY"/.. && pwd -P)
-BANG_LIB=$(cd "$BANG_PATH"/lib && pwd -P)
+require 'pathname'
 
-exec "$BANG_LIB/bang.rb" "$@"
+SCRIPT_DIR = Pathname.new(__FILE__).realpath.dirname
+BANG_ROOT = SCRIPT_DIR.dirname
+BANG_LIB = BANG_ROOT.join 'lib'
+BANG_MAIN = BANG_LIB.join 'bang.rb'
+
+system BANG_MAIN.to_s, *ARGV

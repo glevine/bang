@@ -2,12 +2,21 @@ require 'galaxy'
 require 'installers/galaxy'
 
 module Bang
-  # Update the galaxies.
+  # Update bang and the galaxies.
   def update
     unless ARGV.named.empty?
       abort <<-EOS.undent
         This command updates bang itself and does not take system names.
       EOS
+    end
+
+    updater = Updater.new BANG_REPO
+    begin
+      updater.pull!
+    rescue
+      Bang.fail 'Failed to update bang'
+    else
+      Bang.alert 'Updated bang'
     end
 
     Galaxy.list? do |user, repo|

@@ -5,6 +5,7 @@ require 'pathname'
 BANG_VERSION = '0.1.0'
 
 BANG_LIB = Pathname.new(__FILE__).realpath.dirname
+BANG_REPO = BANG_LIB.parent.parent
 BANG_LIB_BANG = BANG_LIB.join('bang')
 $LOAD_PATH.unshift(BANG_LIB_BANG.to_s) unless $LOAD_PATH.include?(BANG_LIB_BANG.to_s)
 
